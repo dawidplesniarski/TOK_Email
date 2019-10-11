@@ -2,26 +2,22 @@ package com.company;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-public class GUI extends JFrame {
+public class Form {
     private JComboBox schemas;
-    private JPanel panel;
     private JComboBox tables;
     private JTable table1;
+    private JPanel panel;
 
     private JLabel label = new JLabel("sdasdsadsa");
     Connect connect = new Connect();
 
-    public GUI() throws SQLException {
-        String[] types = {"TABLE"};
+    public Form() throws SQLException {
+        String [] types = {"TABLE"};
         DatabaseMetaData dbmd = connect.getConnection().getMetaData();
         ResultSet[] tableResultSet = new ResultSet[1];
         ResultSet schemaResultSet = dbmd.getSchemas();
@@ -35,7 +31,7 @@ public class GUI extends JFrame {
         table1.setModel(model);*/
 
 
-        while (schemaResultSet.next())
+        while(schemaResultSet.next())
             schemas.addItem(schemaResultSet.getString(1));
 
 
@@ -52,7 +48,7 @@ public class GUI extends JFrame {
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-                while (true) {
+                while(true){
                     try {
                         if (!tableResultSet[0].next())
                             break;
@@ -78,11 +74,13 @@ public class GUI extends JFrame {
                     ResultSet resultSet = statement.executeQuery(query);
                     ResultSetMetaData rsmd = resultSet.getMetaData();
                     ArrayList<String> l = new ArrayList<>();
-                    for (int i = 1; i <= rsmd.getColumnCount(); i++)
-                        model.addColumn("" + i, new String[]{rsmd.getColumnName(i)});
-                    while (resultSet.next()) {
+                    for(int i = 1; i <= rsmd.getColumnCount(); i++)
+                        model.addColumn(""+i, new String[]{rsmd.getColumnName(i)});
+                    while (resultSet.next())
+                    {
 
-                        for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                        for(int i = 1; i <= rsmd.getColumnCount(); i++)
+                        {
 
                             l.add(resultSet.getString(i));
 
@@ -101,7 +99,8 @@ public class GUI extends JFrame {
         });
     }
 
-    public JPanel getPanel() {
+
+    public JPanel getPanel(){
         return panel;
     }
 }

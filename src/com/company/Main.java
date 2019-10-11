@@ -3,7 +3,6 @@ package com.company;
 //import sun.misc.FormattedFloatingDecimal;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.sql.*;
 
 public class Main {
@@ -18,8 +17,7 @@ public class Main {
         ResultSet rs = statement.executeQuery("SELECT * FROM dziekanat.studenci");
 
         JFrame frame = new JFrame();
-        GUI form = new GUI();
-
+        Form form = new Form();
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
