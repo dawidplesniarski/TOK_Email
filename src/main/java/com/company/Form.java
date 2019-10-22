@@ -14,7 +14,7 @@ public class Form {
     private JPanel panel;
 
     private JLabel label = new JLabel("sdasdsadsa");
-    Connect connect = new Connect();
+    private Connect connect = new Connect();
 
     public Form() throws SQLException {
         String [] types = {"TABLE"};
