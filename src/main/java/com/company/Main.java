@@ -18,17 +18,9 @@ public class Main {
 
         Connect connect = new Connect();
         Statement statement = connect.getConnection().createStatement();
-        Statement emails = connect.getConnection().createStatement();
-
 
         ResultSet rs = statement.executeQuery("SELECT * FROM dziekanat.studenci");
 
-        ResultSet adressRS = emails.executeQuery("SELECT * FROM dziekanat.mail");
-
-        ArrayList email= new ArrayList();
-        while(adressRS.next()) {
-            email.add(adressRS.getString("adres"));
-        }
 
         JFrame frame = new JFrame();
         Form form = new Form();
@@ -42,9 +34,27 @@ public class Main {
 
         frame.setVisible(true);
 
+        connect.close();
+        statement.close();
+        rs.close();
 
+
+    }
+
+    public static void SendMail() throws SQLException {
         final String username = "testowyzych@gmail.com";
         final String password = "zaq1@WSX";
+
+        Connect connect = new Connect();
+        Statement emails = connect.getConnection().createStatement();
+
+
+        ResultSet adressRS = emails.executeQuery("SELECT * FROM dziekanat.mail");
+
+        ArrayList email= new ArrayList();
+        while(adressRS.next()) {
+            email.add(adressRS.getString("adres"));
+        }
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -90,9 +100,8 @@ public class Main {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
-
-
+        connect.close();
+        emails.close();
+        adressRS.close();
     }
 }

@@ -12,6 +12,7 @@ public class Form {
     private JComboBox tables;
     private JTable table1;
     private JPanel panel;
+    private JButton SendButton;
 
     private JLabel label = new JLabel("sdasdsadsa");
     private Connect connect = new Connect();
@@ -95,6 +96,16 @@ public class Form {
                     e1.printStackTrace();
                 }
 
+            }
+        });
+        SendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    Main.SendMail();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
