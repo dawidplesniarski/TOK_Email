@@ -16,7 +16,11 @@ public class Form {
     public JTable table1;
     private JPanel panel;
     private JButton SendButton;
+    private JTextField subject;
+    private JTextArea content;
     public static String emailAddress;
+    public static String emailSubject;
+    public static String emailContent;
 
     private JLabel label = new JLabel("sdasdsadsa");
     private Connect connect = new Connect();
@@ -120,6 +124,8 @@ public class Form {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
+                    emailSubject = subject.getText().toString();
+                    emailContent = content.getText().toString();
                     Main.SendMail();
                 } catch (SQLException e) {
                     e.printStackTrace();

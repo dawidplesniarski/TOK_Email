@@ -105,9 +105,8 @@ public class Main {
 
             System.out.println("Klasa Main"+Form.emailAddress);
 
-            message.setSubject("Testing Gmail SSL");
-            message.setText("Dear Mail Crawler,"
-                    + "\n\n Please do not spam my email!");
+            message.setSubject(Form.emailSubject);
+            message.setText(Form.emailContent);
 
             Transport.send(message);
 
