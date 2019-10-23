@@ -15,28 +15,32 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-
         Connect connect = new Connect();
         Statement statement = connect.getConnection().createStatement();
 
         ResultSet rs = statement.executeQuery("SELECT * FROM dziekanat.studenci");
 
 
-        JFrame frame = new JFrame();
-        Form form = new Form();
+            try{
+                JFrame frame = new JFrame();
+                Form form = new Form();
 
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.setContentPane(form.getPanel());
+                frame.setContentPane(form.getPanel());
 
-        frame.pack();
+                frame.pack();
 
-        frame.setVisible(true);
-
-        connect.close();
-        statement.close();
-        rs.close();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                rs.close();
+                statement.close();
+                connect.close();
+                System.gc();
+            }
 
 
     }
@@ -45,12 +49,21 @@ public class Main {
         final String username = "testowyzych@gmail.com";
         final String password = "zaq1@WSX";
 
+        Form form = new Form();
+
         Connect connect = new Connect();
         Statement emails = connect.getConnection().createStatement();
 
 
         ResultSet adressRS = emails.executeQuery("SELECT * FROM dziekanat.mail");
 
+        ResultSetMetaData rsmd = adressRS.getMetaData();
+        /*
+        int column = rsmd.getColumnCount();
+        int row = form.table1.getSelectedRow();
+        String adresEmail = form.table1.getModel().getValueAt(row,column).toString();
+        System.out.println(column);
+        */
         ArrayList email= new ArrayList();
         while(adressRS.next()) {
             email.add(adressRS.getString("adres"));
@@ -85,9 +98,9 @@ public class Main {
             /*
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(String.valueOf(address))
-            ); */
-
+                    InternetAddress.parse(String.valueOf(adresEmail))
+            );
+            */
 
             message.setSubject("Testing Gmail SSL");
             message.setText("Dear Mail Crawler,"
@@ -99,9 +112,11 @@ public class Main {
 
         } catch (MessagingException e) {
             e.printStackTrace();
+        }finally {
+            connect.close();
+            emails.close();
+            adressRS.close();
         }
-        connect.close();
-        emails.close();
-        adressRS.close();
+
     }
 }

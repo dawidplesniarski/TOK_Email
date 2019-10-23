@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Form {
     private JComboBox schemas;
     private JComboBox tables;
-    private JTable table1;
+    public JTable table1;
     private JPanel panel;
     private JButton SendButton;
 
@@ -105,6 +105,9 @@ public class Form {
                     Main.SendMail();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }finally {
+                    connect.close();
+                    System.gc();
                 }
             }
         });

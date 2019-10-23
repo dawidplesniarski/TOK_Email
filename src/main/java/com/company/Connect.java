@@ -44,6 +44,8 @@ public class Connect {
         catch(SQLException sqle){
             System.err.println("Blad przy nawiazywaniu polaczeia: " + sqle);
             return null;
+        }finally {
+            System.gc();
         }
 
     }
