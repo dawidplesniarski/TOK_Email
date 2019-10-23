@@ -2,8 +2,11 @@ package com.company;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,6 +16,7 @@ public class Form {
     public JTable table1;
     private JPanel panel;
     private JButton SendButton;
+    public static String emailAddress;
 
     private JLabel label = new JLabel("sdasdsadsa");
     private Connect connect = new Connect();
@@ -98,6 +102,20 @@ public class Form {
 
             }
         });
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                JTable table = (JTable) e.getSource();
+                int row = table.getSelectedRow();
+                int column = table.getSelectedColumn();
+                emailAddress = (String)table1.getValueAt(row, column);
+                System.out.println(emailAddress);
+
+            }
+        });
+
         SendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -111,6 +129,7 @@ public class Form {
                 }
             }
         });
+
     }
 
 

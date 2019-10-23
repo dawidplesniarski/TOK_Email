@@ -25,7 +25,6 @@ public class Main {
                 JFrame frame = new JFrame();
                 Form form = new Form();
 
-
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
                 frame.setContentPane(form.getPanel());
@@ -51,24 +50,26 @@ public class Main {
 
         Form form = new Form();
 
+
         Connect connect = new Connect();
         Statement emails = connect.getConnection().createStatement();
 
 
         ResultSet adressRS = emails.executeQuery("SELECT * FROM dziekanat.mail");
 
-        ResultSetMetaData rsmd = adressRS.getMetaData();
         /*
+        ResultSetMetaData rsmd = adressRS.getMetaData();
         int column = rsmd.getColumnCount();
         int row = form.table1.getSelectedRow();
         String adresEmail = form.table1.getModel().getValueAt(row,column).toString();
         System.out.println(column);
         */
+        /*
         ArrayList email= new ArrayList();
         while(adressRS.next()) {
             email.add(adressRS.getString("adres"));
         }
-
+        */
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "465");
@@ -87,20 +88,22 @@ public class Main {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("testowyzych@gmail.com"));
-
+            /*
             InternetAddress[] address = new InternetAddress[email.size()];
             for (int i = 0; i < email.size(); i++) {
                 address[i] = new InternetAddress((String) email.get(i));
             }
 
             message.setRecipients(Message.RecipientType.TO, address);
+            */
 
-            /*
+
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(String.valueOf(adresEmail))
+                    InternetAddress.parse(String.valueOf(Form.emailAddress))
             );
-            */
+
+            System.out.println("Klasa Main"+Form.emailAddress);
 
             message.setSubject("Testing Gmail SSL");
             message.setText("Dear Mail Crawler,"
