@@ -57,19 +57,6 @@ public class Main {
 
         ResultSet adressRS = emails.executeQuery("SELECT * FROM dziekanat.mail");
 
-        /*
-        ResultSetMetaData rsmd = adressRS.getMetaData();
-        int column = rsmd.getColumnCount();
-        int row = form.table1.getSelectedRow();
-        String adresEmail = form.table1.getModel().getValueAt(row,column).toString();
-        System.out.println(column);
-        */
-        /*
-        ArrayList email= new ArrayList();
-        while(adressRS.next()) {
-            email.add(adressRS.getString("adres"));
-        }
-        */
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "465");

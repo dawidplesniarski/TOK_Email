@@ -22,6 +22,8 @@ public class Form {
     public static String emailSubject;
     public static String emailContent;
 
+    String regex = "^(.+)@(.+)$";
+
     private JLabel label = new JLabel("sdasdsadsa");
     private Connect connect = new Connect();
 
@@ -30,6 +32,9 @@ public class Form {
         DatabaseMetaData dbmd = connect.getConnection().getMetaData();
         ResultSet[] tableResultSet = new ResultSet[1];
         ResultSet schemaResultSet = dbmd.getSchemas();
+        SendButton.setVisible(false);
+        subject.setVisible(false);
+        content.setVisible(false);
 
        /* model.addColumn("1", new Object[]{"asdasdsadsdasd"});
         model.addColumn("2", new Object[]{"asdasdsadsdasd"});
@@ -106,6 +111,26 @@ public class Form {
 
             }
         });
+
+        tables.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            JComboBox tables = (JComboBox) actionEvent.getSource();
+            String selected = (String) tables.getSelectedItem();
+                System.out.println(selected);
+                assert selected != null;
+
+                if(selected.equals("mail")){
+                    SendButton.setVisible(true);
+                    subject.setVisible(true);
+                    content.setVisible(true);
+                }
+
+
+
+            }
+        });
+
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -119,6 +144,8 @@ public class Form {
 
             }
         });
+
+
 
         SendButton.addActionListener(new ActionListener() {
             @Override
