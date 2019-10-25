@@ -10,6 +10,9 @@ import javax.mail.internet.MimeMessage;
 import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.regex.Pattern;
+
+import static com.company.Form.emailAddress;
 
 public class Main {
 
@@ -42,6 +45,19 @@ public class Main {
             }
 
 
+    }
+
+    public static boolean isValid(String emailAddress)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (emailAddress == null)
+            return false;
+        return pat.matcher(emailAddress).matches();
     }
 
     public static void SendMail() throws SQLException {
@@ -87,17 +103,22 @@ public class Main {
 
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(String.valueOf(Form.emailAddress))
+                    InternetAddress.parse(String.valueOf(emailAddress))
             );
 
-            System.out.println("Klasa Main"+Form.emailAddress);
+            System.out.println("Klasa Main"+ emailAddress);
 
             message.setSubject(Form.emailSubject);
             message.setText(Form.emailContent);
 
-            Transport.send(message);
+            if(isValid(emailAddress)) {
+                Transport.send(message);
+                System.out.println("wiadomosc zostala wyslana!");
+            }else{
+                System.out.println("niepoprawny adres email!");
+                System.out.println("Wiadomosc nie zostala wyslana.");
+            }
 
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             e.printStackTrace();

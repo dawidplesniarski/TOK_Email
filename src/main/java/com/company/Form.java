@@ -9,6 +9,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Form {
     private JComboBox schemas;
@@ -22,7 +24,7 @@ public class Form {
     public static String emailSubject;
     public static String emailContent;
 
-    String regex = "^(.+)@(.+)$";
+
 
     private JLabel label = new JLabel("sdasdsadsa");
     private Connect connect = new Connect();
@@ -118,6 +120,10 @@ public class Form {
             JComboBox tables = (JComboBox) actionEvent.getSource();
             String selected = (String) tables.getSelectedItem();
                 System.out.println(selected);
+
+                //EMAIL_ADDRESS_PATTERN.matcher(email).matches()
+                //String regexPattern = "^(.+)@(.+)$";
+
                 assert selected != null;
 
                 if(selected.equals("mail")){
@@ -125,6 +131,16 @@ public class Form {
                     subject.setVisible(true);
                     content.setVisible(true);
                 }
+
+
+                /******
+                String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+                if(emailAddress.matches(regex))
+                {
+                    SendButton.setVisible(true);
+                }
+
+                *******/
 
 
 
@@ -144,7 +160,6 @@ public class Form {
 
             }
         });
-
 
 
         SendButton.addActionListener(new ActionListener() {
