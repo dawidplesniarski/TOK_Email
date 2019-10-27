@@ -4,11 +4,11 @@ import java.sql.*;
 
 public class Connect {
     public String driver = "org.postgresql.Driver";
-    public String host = "195.150.230.210:5434";
-    public String dbname = "2019_plesniarski_dawid";
-    public String user = "2019_plesniarski_dawid";
+    public String host = "";
+    public String dbname = "";
+    public String user = "";
     public String url = "jdbc:postgresql://" + host + "/" + dbname;
-    private String pass = "12345";
+    private String pass = "";
     public Connection connection;
 
     public Connect(){
