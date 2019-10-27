@@ -61,8 +61,8 @@ public class Main {
     }
 
     public static void SendMail() throws SQLException {
-        final String username = "testowyzych@gmail.com";
-        final String password = "zaq1@WSX";
+        final String username = "TYPE_YOUR_MAIL_HERE";
+        final String password = "TYPE_YOUR_PASS_HERE";
 
         Form form = new Form();
 
@@ -90,7 +90,7 @@ public class Main {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("testowyzych@gmail.com"));
+            message.setFrom(new InternetAddress("TYPE_YOUR_MAIL_HERE"));
             /*
             InternetAddress[] address = new InternetAddress[email.size()];
             for (int i = 0; i < email.size(); i++) {
