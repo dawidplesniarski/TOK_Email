@@ -3,6 +3,9 @@ package com.company;
 //import sun.misc.FormattedFloatingDecimal;
 
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -16,8 +19,7 @@ import static com.company.Form.emailAddress;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
-
+    public static void main(String[] args) throws SQLException, IOException {
         Connect connect = new Connect();
         Statement statement = connect.getConnection().createStatement();
 
@@ -61,8 +63,17 @@ public class Main {
     }
 
     public static void SendMail() throws SQLException {
-        final String username = "testowyzych@gmail.com";
-        final String password = "zaq1@WSX";
+
+        Properties properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream("/Users/user/Desktop/IntelliJ/DataBase TOK/src/main/resources/data.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String propEmail = properties.getProperty("email");
+        String propPass = properties.getProperty("emailPassword");
+
 
         Form form = new Form();
 
@@ -83,14 +94,14 @@ public class Main {
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication(propEmail, propPass);
                     }
                 });
 
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("testowyzych@gmail.com"));
+            message.setFrom(new InternetAddress(propEmail));
             /*
             InternetAddress[] address = new InternetAddress[email.size()];
             for (int i = 0; i < email.size(); i++) {
