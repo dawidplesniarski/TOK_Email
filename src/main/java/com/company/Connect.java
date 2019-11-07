@@ -1,14 +1,12 @@
 package com.company;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 public class Connect {
-    public String driver = "org.postgresql.Driver";
-    public String host = "195.150.230.210:5434";
-    public String dbname = "2019_plesniarski_dawid";
-    public String user = "2019_plesniarski_dawid";
-    public String url = "jdbc:postgresql://" + host + "/" + dbname;
-    private String pass = "12345";
+
     public Connection connection;
 
     public Connect(){
@@ -30,6 +28,20 @@ public class Connect {
     }
 
     public Connection makeConnection(){
+        Properties properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream("src/main/resources/data.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String dbname = properties.getProperty("dbName");
+        String user = properties.getProperty("dbUser");
+        String pass = properties.getProperty("dbPass");
+
+        String driver = "org.postgresql.Driver";
+        String host = "195.150.230.210:5434";
+        String url = "jdbc:postgresql://" + host + "/" + dbname;
         try{
             Class.forName(driver);
             Connection connection = DriverManager.getConnection(url,user, pass);
