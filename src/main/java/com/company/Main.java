@@ -3,6 +3,8 @@ package com.company;
 //import sun.misc.FormattedFloatingDecimal;
 
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -61,10 +63,19 @@ public class Main {
     }
 
     public static void SendMail() throws SQLException {
-        final String username = "TYPE_YOUR_MAIL_HERE";
-        final String password = "TYPE_YOUR_PASS_HERE";
 
-        Form form = new Form();
+        Properties properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream("src/main/resources/data.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String propEmail = properties.getProperty("propEmail");
+        String propMailPass = properties.getProperty("propMailPass");
+
+        //final String username = "testowyzych@gmail.com";
+        //final String password = "zaq1@WSX";
 
 
         Connect connect = new Connect();
@@ -83,14 +94,14 @@ public class Main {
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication(propEmail, propMailPass);
                     }
                 });
 
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("TYPE_YOUR_MAIL_HERE"));
+            message.setFrom(new InternetAddress(propEmail));
             /*
             InternetAddress[] address = new InternetAddress[email.size()];
             for (int i = 0; i < email.size(); i++) {
@@ -106,7 +117,7 @@ public class Main {
                     InternetAddress.parse(String.valueOf(emailAddress))
             );
 
-            System.out.println("Klasa Main"+ emailAddress);
+            System.out.println("Klasa Main: "+ emailAddress);
 
             message.setSubject(Form.emailSubject);
             message.setText(Form.emailContent);
