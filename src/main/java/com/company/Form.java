@@ -38,17 +38,9 @@ public class Form {
         subject.setVisible(false);
         content.setVisible(false);
 
-       /* model.addColumn("1", new Object[]{"asdasdsadsdasd"});
-        model.addColumn("2", new Object[]{"asdasdsadsdasd"});
-        model.addRow(new Object[]{"sdfdsfds"});
-        model.addRow(new Object[]{"sdfdsfds"});
-        model.addRow(new Object[]{"sdfdsfds"});
-        model.addRow(new Object[]{"sdfdsfds"});
-        table1.setModel(model);*/
-
 
         while(schemaResultSet.next())
-            schemas.addItem(schemaResultSet.getString(1));
+            schemas.addItem(schemaResultSet.getString(1));  /** wyswietlamy zawartość schematów */
 
 
         schemas.addActionListener(new ActionListener() {
@@ -68,7 +60,7 @@ public class Form {
                     try {
                         if (!tableResultSet[0].next())
                             break;
-                        tables.addItem(tableResultSet[0].getString(3));
+                        tables.addItem(tableResultSet[0].getString(3));     /** wyswietlam zawartosc tabel  */
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
@@ -79,7 +71,7 @@ public class Form {
         });
 
 
-        tables.addActionListener(new ActionListener() {
+        tables.addActionListener(new ActionListener() {     /** Wypisywanie wyniku zapytania   */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selection = (String) tables.getSelectedItem();
@@ -155,7 +147,7 @@ public class Form {
                 JTable table = (JTable) e.getSource();
                 int row = table.getSelectedRow();
                 int column = table.getSelectedColumn();
-                emailAddress = (String)table1.getValueAt(row, column);
+                emailAddress = (String)table1.getValueAt(row, column);  // ustawiam adres email docelowy
                 System.out.println(emailAddress);
 
             }
