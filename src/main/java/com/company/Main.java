@@ -25,7 +25,6 @@ public class Main {
 
         ResultSet rs = statement.executeQuery("SELECT * FROM dziekanat.studenci");
 
-
             try{
                 JFrame frame = new JFrame();
                 Form form = new Form();
@@ -37,7 +36,7 @@ public class Main {
                 frame.pack();
 
                 frame.setVisible(true);
-            } catch (Exception e) {
+            } catch (Exception e){
                 e.printStackTrace();
             }finally {
                 rs.close();

@@ -40,7 +40,7 @@ public class Form {
 
 
         while(schemaResultSet.next())
-            schemas.addItem(schemaResultSet.getString(1));  /** wyswietlamy zawartość schematów */
+            schemas.addItem(schemaResultSet.getString(1));
 
 
         schemas.addActionListener(new ActionListener() {

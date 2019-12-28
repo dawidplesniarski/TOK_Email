@@ -20,9 +20,7 @@ public class Connect {
     public void close(){
         try{
             connection.close();
-        }
-        catch(SQLException sqle)
-        {
+        }catch(SQLException sqle) {
             System.err.println("Błąd przy zamykaniu połączenia: " + sqle);
         }
     }
@@ -56,7 +54,7 @@ public class Connect {
         catch(SQLException sqle){
             System.err.println("Blad przy nawiazywaniu polaczeia: " + sqle);
             return null;
-        }finally {
+        }finally{
             System.gc();
         }
 
