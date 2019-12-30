@@ -1,7 +1,5 @@
 package com.company;
 
-//import sun.misc.FormattedFloatingDecimal;
-
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,8 +7,6 @@ import java.sql.*;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.xml.transform.Result;
-import java.util.ArrayList;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
